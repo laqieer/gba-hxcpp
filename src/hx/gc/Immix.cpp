@@ -565,7 +565,9 @@ static ThreadPoolLock sThreadPoolLock;
 typedef pthread_cond_t ThreadPoolSignal;
 inline void WaitThreadLocked(ThreadPoolSignal &ioSignal)
 {
+#ifndef __GBA__
    pthread_cond_wait(&ioSignal, &sThreadPoolLock.mMutex);
+#endif
 }
 #else
 typedef HxSemaphore ThreadPoolSignal;
@@ -607,8 +609,10 @@ ThreadPoolSignal sThreadJobDone;
 static inline void SignalThreadPool(ThreadPoolSignal &ioSignal, bool sThreadSleeping)
 {
    #ifdef HX_GC_PTHREADS
+#ifndef __GBA__
    if (sThreadSleeping)
       pthread_cond_signal(&ioSignal);
+#endif
    #else
    ioSignal.Set();
    #endif
@@ -4439,6 +4443,7 @@ public:
       void *info = (void *)(size_t)inId;
 
       #ifdef HX_GC_PTHREADS
+#ifndef __GBA__
          pthread_cond_init(&sThreadWake[inId],0);
          sThreadSleeping[inId] = false;
          if (inId==0)
@@ -4447,6 +4452,7 @@ public:
          pthread_t result = 0;
          int created = pthread_create(&result,0,SThreadLoop,info);
          bool ok = created==0;
+#endif
       #elif defined(EMSCRIPTEN)
          // Only one thread
       #else

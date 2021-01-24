@@ -1934,6 +1934,12 @@ class BuildTool
          defines.set ("gcw0", "gcw0");
          defines.set ("BINDIR", "GCW0");
       }
+      else if (defines.exists ("gba"))
+      {
+         defines.set ("toolchain", "gba");
+         defines.set ("gba", "gba");
+         defines.set ("BINDIR", "gba");
+      }
       else if (defines.exists("cygwin") || defines.exists("HXCPP_CYGWIN"))
       {
          set64(defines,m64);

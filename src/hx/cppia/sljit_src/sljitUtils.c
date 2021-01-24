@@ -114,12 +114,16 @@ static pthread_mutex_t allocator_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static SLJIT_INLINE void allocator_grab_lock(void)
 {
+#ifndef __GBA__
 	pthread_mutex_lock(&allocator_mutex);
+#endif
 }
 
 static SLJIT_INLINE void allocator_release_lock(void)
 {
+#ifndef __GBA__
 	pthread_mutex_unlock(&allocator_mutex);
+#endif
 }
 
 #endif /* SLJIT_EXECUTABLE_ALLOCATOR */
@@ -132,12 +136,16 @@ static pthread_mutex_t global_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 SLJIT_API_FUNC_ATTRIBUTE void SLJIT_CALL sljit_grab_lock(void)
 {
+#ifndef __GBA__
 	pthread_mutex_lock(&global_mutex);
+#endif
 }
 
 SLJIT_API_FUNC_ATTRIBUTE void SLJIT_CALL sljit_release_lock(void)
 {
+#ifndef __GBA__
 	pthread_mutex_unlock(&global_mutex);
+#endif
 }
 
 #endif /* SLJIT_UTIL_GLOBAL_LOCK */
@@ -181,12 +189,16 @@ static pthread_mutex_t dev_zero_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static SLJIT_INLINE sljit_s32 open_dev_zero(void)
 {
+#ifndef __GBA__
 	pthread_mutex_lock(&dev_zero_mutex);
+#endif
 	/* The dev_zero might be initialized by another thread during the waiting. */
 	if (dev_zero < 0) {
 		dev_zero = open("/dev/zero", O_RDWR);
 	}
+#ifndef __GBA__
 	pthread_mutex_unlock(&dev_zero_mutex);
+#endif
 	return dev_zero < 0;
 }
 

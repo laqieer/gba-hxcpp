@@ -1,0 +1,71 @@
+<xml>
+
+<!-- DEVKITPRO TOOLS -------------------------------------->
+
+
+<section if="gba">
+   <!-- TODO: portlibs -->
+   <path name="${DEVKITPRO}/devkitARM/bin/" />
+   <path name="${DEVKITPRO}/tools/bin/" />
+   <set name='CXX' value='arm-none-eabi-g++' />
+   <set name='HXCPP_STRIP' value='arm-none-eabi-strip' />
+   <set name='HXCPP_AR' value='arm-none-eabi-ar' />
+   <set name='HXCPP_RANLIB' value='arm-none-eabi-ranlib' />
+</section>
+    
+<set name="HXCPP_CPP11" value="1" unless="HXCPP_NO_CPP11" />
+
+<include name="toolchain/gcc-toolchain.xml"/>
+<set name="noM32" value="1" if="gba" />
+
+<compiler id="gba" exe="g++" if="gba">
+  <exe name="${CXX}" if="CXX" />
+  <flag value="-c"/>
+  <flag value="-fvisibility=hidden"/>
+  <cppflag value="-frtti"/>
+  <cppflag value="-std=c++11" if="HXCPP_CPP11" />
+  <flag value="-g" if="debug"/>
+  <flag value="-O2" unless="debug"/>
+  <flag value='-march=armv4t' />
+  <flag value='-mcpu=arm7tdmi' />
+  <flag value='-mtune=arm7tdmi' />
+  <flag value='-Wall' />
+  <flag value='-D__GBA__' />
+  <flag value='-D__TM_GMTOFF=tm_gmtoff'/>
+  <flag value='-ffunction-sections' />
+  <flag value='-fexceptions' />
+  <flag value='-fpermissive' />
+  <flag value="-Wno-overflow" />
+  <cppflag value="-Wno-invalid-offsetof" />
+  <include name="toolchain/common-defines.xml" />
+  <flag value="-marm" if="arm"/>
+  <flag value="-mthumb" unless="arm"/>
+  <flag value='-mthumb-interwork' />
+  <flag value="-I${HXCPP}/include"/>
+  <flag value="-I${HXCPP}/include/mock"/>
+  <!--flag value="-I${DEVKITPRO}/devkitARM/lib/gcc/arm-none-eabi/10.1.0/include"/-->
+  <flag value="-I${DEVKITPRO}/devkitARM/arm-none-eabi/include"/>
+  <flag value="-I${DEVKITPRO}/libgba/include" if="libgba"/>
+  <flag value="-I${DEVKITPRO}/libtonc/include" unless="libgba"/>
+  <objdir value="obj/gba${OBJEXT}/"/>
+  <outflag value="-o"/>
+  <ext value=".o"/>
+</compiler>
+
+<linker id="exe" exe="g++" if="gba">
+  <exe name="${CXX}" if="CXX" />
+  <fromfile value="" if="GCC_OLD" />
+  <flag value="-debug" if="debug"/>
+  <!--flag value="-rdynamic"/-->
+  <!--lib name="-ldl"/-->
+  <!--lib name="-lpthread"/-->
+  <flag value="-specs=gba.specs"/>
+  <lib name="-lgba" if="libgba"/>
+  <lib name="-ltonc" unless="libgba"/>
+  <lib name="-L${DEVKITPRO}/libgba/lib" if="libgba"/>
+  <lib name="-L${DEVKITPRO}/libtonc/lib" unless="libgba"/>
+  <ext value=""/>
+  <outflag value="-o "/>
+</linker>
+
+</xml>

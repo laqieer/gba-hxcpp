@@ -61,7 +61,7 @@ class Builder
 
             switch(target)
             {
-               case "ios", "android", "blackberry", "tizen", "emscripten", "webos", "windows", "msvc", "linux", "mac", "mingw", "tvos":
+               case "ios", "android", "blackberry", "tizen", "emscripten", "webos", "windows", "msvc", "linux", "mac", "mingw", "tvos", "gba":
                   defaultTarget = false;
                   if (linkStatic)
                   {
@@ -198,6 +198,9 @@ class Builder
                   //validArchs.set("x86", ["-Dappletvsim", "-DENABLE_BITCODE"].concat(staticFlags) );
                   validArchs.set("x86_64", ["-Dappletvsim", "-DHXCPP_M64", "-DENABLE_BITCODE"].concat(staticFlags) );
 
+               case "gba":
+                  validArchs.set("armv4t", ["-Dgba"].concat(staticFlags) );
+
             }
 
 
@@ -312,7 +315,7 @@ class Builder
          Sys.println("  link    : ndll- or static-");
          Sys.println("            (none specified = both link types, mingw static only");
       }
-      Sys.println("  arch    : -armv5 -armv6 -armv7 -arm64 -x86 -x86_64 -m32 -m64");
+      Sys.println("  arch    : -armv4t -armv5 -armv6 -armv7 -arm64 -x86 -x86_64 -m32 -m64");
       Sys.println("            (none specified = all valid architectures");
       Sys.println("  -D...   : defines passed to hxcpp build system");
       if (link!="")

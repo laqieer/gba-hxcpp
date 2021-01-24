@@ -66,6 +66,16 @@ void hxFreeLibrary(Module inModule) { FreeLibrary(inModule); }
 
 typedef void *Module;
 
+#ifdef __GBA__
+
+Module hxLoadLibrary(String inLib) { return NULL; }
+
+void *hxFindSymbol(Module inModule, const char *inSymbol) { return NULL; }
+
+void hxFreeLibrary(Module inModule) {}
+
+#else
+
 #include <dlfcn.h>
 typedef void *Module;
 Module hxLoadLibrary(String inLib)
@@ -94,9 +104,12 @@ Module hxLoadLibrary(String inLib)
    }
    return result;
 }
+
 void *hxFindSymbol(Module inModule, const char *inSymbol) { return dlsym(inModule,inSymbol); }
 
 void hxFreeLibrary(Module inModule) { dlclose(inModule); }
+
+#endif
 
 #endif
 

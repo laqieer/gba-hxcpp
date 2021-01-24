@@ -319,7 +319,9 @@ static void destroyThreadInfo(void *i)
 }
 static void make_key()
 {
+#ifndef __GBA__
    pthread_key_create(&externThreadInfoKey, destroyThreadInfo);
+#endif
 }
 #elif defined(HXCPP_THREAD_INFO_LOCAL)
 struct ThreadInfoHolder
@@ -349,10 +351,12 @@ static hxThreadInfo *GetCurrentInfo(bool createNew = true)
 	if (!info)
    {
       #ifdef HXCPP_THREAD_INFO_PTHREAD
+#ifndef __GBA__
       pthread_once(&key_once, make_key);
       hxThreadInfo **pp = (hxThreadInfo **)pthread_getspecific(externThreadInfoKey);
       if (pp)
          info = *pp;
+#endif
       #elif defined(HXCPP_THREAD_INFO_LOCAL)
       info = threadHolder.get();
       #else
@@ -370,7 +374,9 @@ static hxThreadInfo *GetCurrentInfo(bool createNew = true)
       *threadRoot = info; 
 		hx::GCAddRoot(threadRoot);
       #ifdef HXCPP_THREAD_INFO_PTHREAD
+#ifndef __GBA__
       pthread_setspecific(externThreadInfoKey, threadRoot);
+#endif
       #elif defined(HXCPP_THREAD_INFO_LOCAL)
       threadHolder.set(threadRoot);
       #else
