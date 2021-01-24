@@ -56,6 +56,8 @@
   <exe name="${CXX}" if="CXX" />
   <fromfile value="" if="GCC_OLD" />
   <flag value="-debug" if="debug"/>
+  <flag value="-Xlinker"/>
+  <flag value="--no-warn-mismatch"/>
   <!--flag value="-rdynamic"/-->
   <!--lib name="-ldl"/-->
   <lib name="-L${HXCPP}/include/mock/lib"/>
