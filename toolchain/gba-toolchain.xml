@@ -58,9 +58,12 @@
   <flag value="-debug" if="debug"/>
   <flag value="-Xlinker"/>
   <flag value="--no-warn-mismatch"/>
+  <flag value="-Xlinker"/>
+  <flag value="--no-check-sections"/>
   <!--flag value="-rdynamic"/-->
   <!--lib name="-ldl"/-->
   <lib name="-L${HXCPP}/include/mock/lib"/>
+  <lib name="-lc"/>
   <lib name="-lpthread"/>
   <flag value="-specs=gba.specs"/>
   <lib name="-L${DEVKITPRO}/libgba/lib" if="libgba"/>

@@ -11,6 +11,16 @@
 #include <unistd.h>
 #endif
 
+#ifdef __GBA__
+
+extern "C" void __aeabi_read_tp() {}
+extern "C" void __libc_init_array() {}
+extern "C" void __cxa_atexit() {}
+extern "C" int* __errno() {}
+extern "C" { struct _reent *_impure_ptr __ATTRIBUTE_IMPURE_PTR__; }
+
+#endif
+
 #if (defined (IPHONE) || defined(EMSCRIPTEN) || defined(STATIC_LINK) || defined(APPLETV) ) && \
 	!defined(HXCPP_DLL_IMPORT) && (!defined(HXCPP_DLL_EXPORT) || defined(HXCPP_SCRIPTABLE) )
 #define HXCPP_NO_DYNAMIC_LOADING
