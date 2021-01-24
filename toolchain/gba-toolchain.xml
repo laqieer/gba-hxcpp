@@ -43,7 +43,6 @@
   <flag value='-mthumb-interwork' />
   <flag value="-I${HXCPP}/include"/>
   <flag value="-I${HXCPP}/include/mock"/>
-  <!--flag value="-I${DEVKITPRO}/devkitARM/lib/gcc/arm-none-eabi/10.1.0/include"/-->
   <flag value="-I${DEVKITPRO}/devkitARM/arm-none-eabi/include"/>
   <flag value="-I${DEVKITPRO}/libgba/include" if="libgba"/>
   <flag value="-I${DEVKITPRO}/libtonc/include" unless="libgba"/>
@@ -56,15 +55,6 @@
   <exe name="${CXX}" if="CXX" />
   <fromfile value="" if="GCC_OLD" />
   <flag value="-debug" if="debug"/>
-  <flag value="-Xlinker"/>
-  <flag value="--no-warn-mismatch"/>
-  <flag value="-Xlinker"/>
-  <flag value="--no-check-sections"/>
-  <!--flag value="-rdynamic"/-->
-  <!--lib name="-ldl"/-->
-  <lib name="-L${HXCPP}/include/mock/lib"/>
-  <lib name="-lc"/>
-  <lib name="-lpthread"/>
   <flag value="-specs=gba.specs"/>
   <lib name="-L${DEVKITPRO}/libgba/lib" if="libgba"/>
   <lib name="-L${DEVKITPRO}/libtonc/lib" unless="libgba"/>

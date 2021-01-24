@@ -13,11 +13,97 @@
 
 #ifdef __GBA__
 
-extern "C" void __aeabi_read_tp() {}
-extern "C" void __libc_init_array() {}
-extern "C" void __cxa_atexit() {}
-extern "C" int* __errno() {}
-extern "C" { struct _reent *_impure_ptr __ATTRIBUTE_IMPURE_PTR__; }
+extern "C" {
+
+int   pthread_attr_destroy(pthread_attr_t *) { return 0; } 
+int   pthread_attr_getdetachstate(const pthread_attr_t *, int *) { return 0; } 
+int   pthread_attr_getguardsize(const pthread_attr_t *, size_t *) { return 0; } 
+int   pthread_attr_getinheritsched(const pthread_attr_t *, int *) { return 0; } 
+int   pthread_attr_getschedparam(const pthread_attr_t *,
+          struct sched_param *) { return 0; } 
+int   pthread_attr_getschedpolicy(const pthread_attr_t *, int *) { return 0; } 
+int   pthread_attr_getscope(const pthread_attr_t *, int *) { return 0; } 
+int   pthread_attr_getstackaddr(const pthread_attr_t *, void **) { return 0; } 
+int   pthread_attr_getstacksize(const pthread_attr_t *, size_t *) { return 0; } 
+int   pthread_attr_init(pthread_attr_t *) { return 0; } 
+int   pthread_attr_setdetachstate(pthread_attr_t *, int) { return 0; } 
+int   pthread_attr_setguardsize(pthread_attr_t *, size_t) { return 0; } 
+int   pthread_attr_setinheritsched(pthread_attr_t *, int) { return 0; } 
+int   pthread_attr_setschedparam(pthread_attr_t *,
+          const struct sched_param *) { return 0; } 
+int   pthread_attr_setschedpolicy(pthread_attr_t *, int) { return 0; } 
+int   pthread_attr_setscope(pthread_attr_t *, int) { return 0; } 
+int   pthread_attr_setstackaddr(pthread_attr_t *, void *) { return 0; } 
+int   pthread_attr_setstacksize(pthread_attr_t *, size_t) { return 0; } 
+int   pthread_cancel(pthread_t) { return 0; } 
+void  pthread_cleanup_pop(int) {} 
+int   pthread_cond_broadcast(pthread_cond_t *) { return 0; } 
+int   pthread_cond_destroy(pthread_cond_t *) { return 0; } 
+int   pthread_cond_init(pthread_cond_t *, const pthread_condattr_t *) { return 0; } 
+int   pthread_cond_signal(pthread_cond_t *) { return 0; } 
+int   pthread_cond_timedwait(pthread_cond_t *, 
+          pthread_mutex_t *, const struct timespec *) { return 0; } 
+int   pthread_cond_wait(pthread_cond_t *, pthread_mutex_t *) { return 0; } 
+int   pthread_condattr_destroy(pthread_condattr_t *) { return 0; } 
+int   pthread_condattr_getpshared(const pthread_condattr_t *, int *) { return 0; } 
+int   pthread_condattr_init(pthread_condattr_t *) { return 0; } 
+int   pthread_condattr_setpshared(pthread_condattr_t *, int) { return 0; } 
+int   pthread_create(pthread_t *, const pthread_attr_t *,
+          void *(*)(void *), void *) { return 0; } 
+int   pthread_detach(pthread_t) { return 0; } 
+int   pthread_equal(pthread_t, pthread_t) { return 0; } 
+void  pthread_exit(void *) {} 
+int   pthread_getconcurrency(void) { return 0; } 
+int   pthread_getschedparam(pthread_t, int *, struct sched_param *) { return 0; } 
+void *pthread_getspecific(pthread_key_t) { return 0; } 
+int   pthread_join(pthread_t, void **) { return 0; } 
+int   pthread_key_create(pthread_key_t *, void (*)(void *)) { return 0; } 
+int   pthread_key_delete(pthread_key_t) { return 0; } 
+int   pthread_mutex_destroy(pthread_mutex_t *) { return 0; } 
+int   pthread_mutex_getprioceiling(const pthread_mutex_t *, int *) { return 0; } 
+int   pthread_mutex_init(pthread_mutex_t *, const pthread_mutexattr_t *) { return 0; } 
+int   pthread_mutex_lock(pthread_mutex_t *) { return 0; } 
+int   pthread_mutex_setprioceiling(pthread_mutex_t *, int, int *) { return 0; } 
+int   pthread_mutex_trylock(pthread_mutex_t *) { return 0; }
+int   pthread_mutex_unlock(pthread_mutex_t *) { return 0; }
+int   pthread_mutexattr_destroy(pthread_mutexattr_t *) { return 0; }
+int   pthread_mutexattr_getprioceiling(const pthread_mutexattr_t *,
+          int *) { return 0; }
+int   pthread_mutexattr_getprotocol(const pthread_mutexattr_t *, int *) { return 0; }
+int   pthread_mutexattr_getpshared(const pthread_mutexattr_t *, int *) { return 0; }
+int   pthread_mutexattr_gettype(const pthread_mutexattr_t *, int *) { return 0; }
+int   pthread_mutexattr_init(pthread_mutexattr_t *) { return 0; }
+int   pthread_mutexattr_setprioceiling(pthread_mutexattr_t *, int) { return 0; }
+int   pthread_mutexattr_setprotocol(pthread_mutexattr_t *, int) { return 0; }
+int   pthread_mutexattr_setpshared(pthread_mutexattr_t *, int) { return 0; }
+int   pthread_mutexattr_settype(pthread_mutexattr_t *, int) { return 0; }
+int   pthread_once(pthread_once_t *, void (*)(void)) { return 0; }
+int   pthread_rwlock_destroy(pthread_rwlock_t *) { return 0; }
+int   pthread_rwlock_init(pthread_rwlock_t *,
+          const pthread_rwlockattr_t *) { return 0; }
+int   pthread_rwlock_rdlock(pthread_rwlock_t *) { return 0; }
+int   pthread_rwlock_tryrdlock(pthread_rwlock_t *) { return 0; }
+int   pthread_rwlock_trywrlock(pthread_rwlock_t *) { return 0; }
+int   pthread_rwlock_unlock(pthread_rwlock_t *) { return 0; }
+int   pthread_rwlock_wrlock(pthread_rwlock_t *) { return 0; }
+int   pthread_rwlockattr_destroy(pthread_rwlockattr_t *) { return 0; }
+int   pthread_rwlockattr_getpshared(const pthread_rwlockattr_t *,
+          int *) { return 0; }
+int   pthread_rwlockattr_init(pthread_rwlockattr_t *) { return 0; }
+int   pthread_rwlockattr_setpshared(pthread_rwlockattr_t *, int) { return 0; }
+pthread_t
+      pthread_self(void) { return 0; }
+int   pthread_setcancelstate(int, int *) { return 0; }
+int   pthread_setcanceltype(int, int *) { return 0; }
+int   pthread_setconcurrency(int) { return 0; }
+int   pthread_setschedparam(pthread_t, int ,
+          const struct sched_param *) { return 0; }
+int   pthread_setspecific(pthread_key_t, const void *) { return 0; }
+void  pthread_testcancel(void) {}
+
+void __aeabi_read_tp() {}
+
+}
 
 #endif
 
