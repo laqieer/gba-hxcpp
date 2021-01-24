@@ -1,6 +1,10 @@
 #ifndef DLFCN_H
 #define DLFCN_H
 
+#ifdef __cplusplus  
+extern "C" {  
+#endif 
+
 // Copied from: https://opensource.apple.com/source/dyld/dyld-519.2.2/include/dlfcn.h.auto.html
 
 #define RTLD_LAZY	0x1
@@ -16,5 +20,9 @@ int dlclose(void * __handle);
 char * dlerror(void);
 void * dlopen(const char * __path, int __mode);
 void * dlsym(void * __handle, const char * __symbol);
+
+#ifdef __cplusplus  
+}  
+#endif  
 
 #endif

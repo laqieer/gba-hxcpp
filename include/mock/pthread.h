@@ -1,6 +1,10 @@
 #ifndef PTHREAD_H
 #define PTHREAD_H
 
+#ifdef __cplusplus  
+extern "C" {  
+#endif 
+
 #include <time.h>
 
 // Copied from: https://www.qnx.com/developers/docs/6.4.1/neutrino/lib_ref/s/sched_param.html
@@ -226,5 +230,9 @@ int   pthread_setschedparam(pthread_t, int ,
           const struct sched_param *);
 int   pthread_setspecific(pthread_key_t, const void *);
 void  pthread_testcancel(void);
+
+#ifdef __cplusplus  
+}  
+#endif  
 
 #endif

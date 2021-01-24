@@ -58,12 +58,13 @@
   <flag value="-debug" if="debug"/>
   <!--flag value="-rdynamic"/-->
   <!--lib name="-ldl"/-->
-  <!--lib name="-lpthread"/-->
+  <lib name="-L${HXCPP}/include/mock/lib"/>
+  <lib name="-lpthread"/>
   <flag value="-specs=gba.specs"/>
-  <lib name="-lgba" if="libgba"/>
-  <lib name="-ltonc" unless="libgba"/>
   <lib name="-L${DEVKITPRO}/libgba/lib" if="libgba"/>
   <lib name="-L${DEVKITPRO}/libtonc/lib" unless="libgba"/>
+  <lib name="-lgba" if="libgba"/>
+  <lib name="-ltonc" unless="libgba"/>
   <ext value=""/>
   <outflag value="-o "/>
 </linker>
